@@ -15,7 +15,6 @@ export class CarComponent {
   saveEmitter = new EventEmitter();
 
   save(){
-    console.log("Salvar carro", this.car.name);
     this.saveEmitter.emit();
   }
 

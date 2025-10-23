@@ -8,6 +8,10 @@ import { Car } from '../../Car';
 })
 export class CarsComponent {
 
+  car: Car = {} as Car;
+  isUpdate: boolean = false;
+  idCount: number = 4;
+
   cars: Car[] = [
     { id: 1, name: 'Corolla', manufacturer: 'Toyota', price: 15000, year: 2020 },
     { id: 2, name: 'Civic', manufacturer: 'Honda', price: 25000, year: 2019 },
@@ -16,15 +20,27 @@ export class CarsComponent {
 
   saveCar(){
 
+    if (!this.isUpdate) {
+      this.car.id = this.idCount++;
+      this.cars.push(this.car);
+    }
+    
+    this.car = {} as Car;
+    this.isUpdate = false;
+
   }
 
   editCar(selectedCar: Car){
-    console.log('Edit Car', selectedCar);
+
+    this.car = selectedCar;
+    this.isUpdate = true; 
+
   }
 
-  removeCar(car: Car){
-    console.log('Remove Car', car);
-  }
+  removeCar(removeCar: Car){
 
+    this.cars = this.cars.filter(c => c.id !== removeCar.id);
+
+  }
 
 }
